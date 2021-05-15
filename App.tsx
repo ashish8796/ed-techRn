@@ -3,6 +3,7 @@ import {SafeAreaView, StyleSheet, Platform, StatusBar} from 'react-native';
 import SplashScreen from 'react-native-splash-screen';
 import Intro1 from './src/screens/Intro1';
 import Intro2 from './src/screens/Intro2';
+import EdTechIntro from './src/screens/EdTechIntro';
 
 const App = () => {
   useEffect(() => {
@@ -11,9 +12,7 @@ const App = () => {
 
   return (
     <SafeAreaView style={styles.appContainer}>
-      {/* <Intro1 /> */}
-      <Intro2 />
-
+      <EdTechIntro />
       {Platform.OS === 'ios' && <StatusBar barStyle="light-content" />}
     </SafeAreaView>
   );

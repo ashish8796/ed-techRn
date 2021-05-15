@@ -29,9 +29,7 @@ export default function CreateScreensImg({
 }
 
 const styles = StyleSheet.create({
-  imgContainer: {
-    marginTop: 144,
-  },
+  imgContainer: {},
 
   textContainer: {
     marginVertical: 8,

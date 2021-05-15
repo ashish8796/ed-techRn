@@ -1,3 +1,5 @@
+import {Dimensions} from 'react-native';
+
 const customStyles = {
   buttonStyle: {
     width: 311,
@@ -8,8 +10,7 @@ const customStyles = {
     paddingVertical: 16,
     paddingHorizontal: 32,
     borderRadius: 16,
-    position: 'absolute',
-    bottom: 16,
+    marginBottom: 16,
   },
 
   buttonText: {
@@ -35,6 +36,12 @@ const customStyles = {
       fontWeight: '500',
       color: '#78746D',
     },
+  },
+
+  introContainer: {
+    width: Dimensions.get('window').width,
+    height: 446,
+    alignItems: 'center',
   },
 };
 

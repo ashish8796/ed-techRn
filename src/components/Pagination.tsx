@@ -6,16 +6,12 @@ interface IPaginationProps {
 }
 
 export default function Pagination({currentPage}: IPaginationProps) {
-  const [current, setCurrent] = useState(currentPage);
-
   return (
     <View style={styles.paginationContainer}>
       <FlatList
-        data={[1, 2, 3]}
+        data={[0, 1, 2]}
         renderItem={({item, index}) => (
-          <View
-            style={currentPage === index + 1 ? styles.current : styles.dot}
-          />
+          <View style={currentPage === index ? styles.current : styles.dot} />
         )}
         keyExtractor={(item, index) => '' + index}
         horizontal
@@ -26,21 +22,22 @@ export default function Pagination({currentPage}: IPaginationProps) {
 
 const styles = StyleSheet.create({
   paginationContainer: {
+    height: 6,
     flexDirection: 'column',
-    marginTop: 32,
   },
 
   current: {
     width: 16,
     height: 6,
     borderRadius: 4,
+    marginLeft: 18,
     backgroundColor: '#65AAEA',
   },
 
   dot: {
     width: 6,
     height: 6,
-    marginHorizontal: 28,
+    marginLeft: 18,
     backgroundColor: '#D5D4D4',
     borderRadius: 3,
   },
