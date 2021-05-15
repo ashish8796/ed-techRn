@@ -1,18 +1,24 @@
 import React from 'react';
-import {View, Text, Pressable, StyleSheet} from 'react-native';
+import {TextStyle} from 'react-native';
+import {View, Text, Pressable, StyleSheet, ViewStyle} from 'react-native';
 
 interface ILoginSignButtonProps {
   label: string;
   handlePress: () => void;
+  customStyle?: {
+    button?: ViewStyle;
+    text?: TextStyle;
+  };
 }
 
 export default function LoginSignButton({
   label,
   handlePress,
+  customStyle,
 }: ILoginSignButtonProps) {
   return (
-    <Pressable onPress={handlePress}>
-      <Text style={styles.pressableText}>{label}</Text>
+    <Pressable onPress={handlePress} style={[customStyle?.button]}>
+      <Text style={[styles.pressableText, customStyle?.text]}>{label}</Text>
     </Pressable>
   );
 }

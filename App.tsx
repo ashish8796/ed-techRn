@@ -7,6 +7,7 @@ import EdTechIntro from './src/screens/EdTechIntro';
 import {createStackNavigator} from '@react-navigation/stack';
 import Login from './src/screens/Login';
 import SignUp from './src/screens/SignUp';
+import Profile from './src/screens/Profile';
 
 const Stack = createStackNavigator();
 
@@ -26,6 +27,8 @@ const App = () => {
           <Stack.Screen name="Login" component={Login} />
 
           <Stack.Screen name="SignUp" component={SignUp} />
+
+          <Stack.Screen name="Profile" component={Profile} />
         </Stack.Navigator>
       </SafeAreaView>
     </NavigationContainer>

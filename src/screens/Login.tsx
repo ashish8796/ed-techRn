@@ -50,7 +50,9 @@ export default function Login() {
     console.log(e.nativeEvent);
   };
 
-  const handleLoginPress = () => {};
+  const handleLoginPress = () => {
+    navigation.navigate('Profile');
+  };
 
   const handleSignUpPress = (): void => {
     navigation.navigate('SignUp');
