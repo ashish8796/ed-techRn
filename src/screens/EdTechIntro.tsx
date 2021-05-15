@@ -6,6 +6,7 @@ import {
   StyleSheet,
   ScrollViewProps,
   ScrollViewComponent,
+  Dimensions,
 } from 'react-native';
 import {customStyles} from '../utils/styles';
 import Intro1 from './Intro1';
@@ -17,7 +18,6 @@ import {useNavigation} from '@react-navigation/native';
 
 export default function EdTechIntro() {
   const navigation = useNavigation();
-  console.log(navigation);
 
   const scrollRef = useRef(undefined);
   const [introNum, setIntroNum] = useState<number>(0);
@@ -32,7 +32,9 @@ export default function EdTechIntro() {
     if (introNum == 2) {
       navigation.navigate('Login');
     } else {
-      scrollRef.current.scrollTo({x: (introNum + 1) * 388});
+      scrollRef.current.scrollTo({
+        x: (introNum + 1) * Dimensions.get('screen').width,
+      });
     }
   };
 

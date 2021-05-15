@@ -39,7 +39,7 @@ const customStyles = {
   },
 
   introContainer: {
-    width: Dimensions.get('window').width,
+    width: Dimensions.get('screen').width,
     height: 446,
     alignItems: 'center',
   },
@@ -50,6 +50,7 @@ const customStyles = {
       paddingHorizontal: 16,
       alignItems: 'center',
       backgroundColor: '#fff',
+      position: 'relative',
       // borderColor: 'red',
       // borderWidth: 1,
     },

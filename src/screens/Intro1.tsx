@@ -3,7 +3,6 @@ import {StyleSheet, View} from 'react-native';
 import CreateScreensImg from '../components/Screens/CreateScreensImg';
 import CoolKidsLongDistance from './../assets/images/screens/intro-1/Cool Kids Long Distance Relationship.svg';
 import {customStyles} from '../utils/styles';
-import Pagination from '../components/Pagination';
 
 export default function Intro1() {
   const text = {

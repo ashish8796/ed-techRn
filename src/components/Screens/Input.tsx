@@ -1,12 +1,24 @@
 import React from 'react';
-import {View, Text, TextInput, StyleSheet} from 'react-native';
+import {
+  View,
+  Text,
+  TextInput,
+  StyleSheet,
+  NativeSyntheticEvent,
+  TextInputChangeEventData,
+} from 'react-native';
 
 interface IInputProps {
   // type: string;
   value: string;
   placeholderText: string;
-  handleChange: () => void;
+  handleChange: (
+    e: NativeSyntheticEvent<TextInputChangeEventData>,
+    name: string,
+  ) => void;
   password: boolean;
+  name: string;
+  secureTextEntry?: boolean;
 }
 
 export default function Input({
@@ -14,13 +26,18 @@ export default function Input({
   password,
   placeholderText,
   handleChange,
+  name,
+  secureTextEntry,
 }: // type,
 IInputProps) {
   return (
     <TextInput
+      secureTextEntry={secureTextEntry}
       style={styles.inputElem}
       value={value}
-      onChange={handleChange}
+      onChange={e => {
+        handleChange(e, name);
+      }}
       placeholder={placeholderText}
       placeholderTextColor="#78746D"
     />

@@ -1,44 +1,48 @@
+import {useNavigation} from '@react-navigation/native';
 import React, {useState} from 'react';
 import {
   View,
   Text,
   StyleSheet,
-  TouchableOpacity,
+  Dimensions,
   NativeSyntheticEvent,
   TextInputChangeEventData,
 } from 'react-native';
-import Input from '../components/Screens/Input';
-import {customStyles} from '../utils/styles';
-import CreateScreensImg from '../components/Screens/CreateScreensImg';
-import CoolKidsSitting from './../assets/images/screens/login/Cool Kids Sitting.svg';
-import LoginSignButton from '../components/Screens/LoginSignButton';
-import Button from '../components/Screens/Button';
 import CreateIcon from '../components/CreateIcon';
-import {iconObj} from '../utils/socialMediaIcon';
+import Button from '../components/Screens/Button';
+import CreateScreensImg from '../components/Screens/CreateScreensImg';
+import GoBack from '../components/Screens/GoBack';
+import Input from '../components/Screens/Input';
+import LoginSignButton from '../components/Screens/LoginSignButton';
 import {iconsObj} from '../utils/icons';
-import {useNavigation} from '@react-navigation/native';
+import {customStyles} from '../utils/styles';
+import {handleGoBack} from '../utils/utilsFuctions';
+import CoolKidsStanding from './../assets/images/screens/signUp/Cool Kids Standing.svg';
 
 const initState = {
+  name: '',
   email: '',
   password: '',
 };
 
-export default function Login() {
+export default function SignUp() {
   const navigation = useNavigation();
-  const [loginData, setLoginData] = useState(initState);
-
-  const [isPasswordShown, setPasswordShown] = useState<boolean>(false);
-
-  const {email, password} = loginData;
+  const [userData, setUserData] = useState(initState);
+  const {name, email, password} = userData;
+  const [passwordShown, setPasswordShown] = useState<boolean>(false);
 
   const text = {
-    title: 'Log in',
-    body: 'Login with social networks',
+    title: 'Sign up',
+    body: 'Create your account',
   };
 
   const handleEyePress = (): void => {
-    console.log(isPasswordShown);
-    setPasswordShown(!isPasswordShown);
+    console.log(passwordShown);
+    setPasswordShown(!passwordShown);
+  };
+
+  const handleLogInPress = (): void => {
+    navigation.navigate('Login');
   };
 
   const handleOnChange = (
@@ -46,29 +50,31 @@ export default function Login() {
     name: string,
   ): void => {
     const {text} = e.nativeEvent;
-    setLoginData({...loginData, [name]: text});
-    console.log(e.nativeEvent);
-  };
-
-  const handleLoginPress = () => {};
-
-  const handleSignUpPress = (): void => {
-    navigation.navigate('SignUp');
+    setUserData({...userData, [name]: text});
   };
 
   return (
     <View style={styles.container}>
+      <View style={styles.goBackButton}>
+        <GoBack
+          handlePress={() => handleGoBack(navigation)}
+          goStyle={styles.goStyle}
+        />
+      </View>
+
       <CreateScreensImg
         text={text}
-        SvgImg={CoolKidsSitting}
+        SvgImg={CoolKidsStanding}
         imgStyle={styles.imgStyle}
       />
 
-      <View style={styles.icons}>
-        <CreateIcon Icon={iconObj['facebook']} handlePress={() => {}} />
-        <CreateIcon Icon={iconObj['instagram']} handlePress={() => {}} />
-        <CreateIcon Icon={iconObj['google']} handlePress={() => {}} />
-      </View>
+      <Input
+        placeholderText="Name"
+        value={name}
+        handleChange={handleOnChange}
+        password={false}
+        name="name"
+      />
 
       <Input
         placeholderText="Email"
@@ -85,27 +91,24 @@ export default function Login() {
           handleChange={handleOnChange}
           password={false}
           name="password"
-          secureTextEntry={!isPasswordShown}
+          secureTextEntry={!passwordShown}
         />
-
         <CreateIcon
           handlePress={handleEyePress}
-          Icon={iconsObj[isPasswordShown ? 'open eye' : 'close eye']}
+          Icon={iconsObj[passwordShown ? 'open eye' : 'close eye']}
           iconStyle={styles.iconStyle}
         />
       </View>
 
-      <LoginSignButton label="Forgot Password?" handlePress={() => {}} />
-
       <Button
-        label="Log in"
-        handlePress={handleLoginPress}
+        label="Sign up"
+        handlePress={() => {}}
         buttonStyle={styles.loginButtonStyle}
         textStyle={styles.loginButtonTextStyle}
         customStyleViaComponent={styles.customStyleForButton}
       />
 
-      <LoginSignButton label="Sign up" handlePress={handleSignUpPress} />
+      <LoginSignButton label="Log in" handlePress={handleLogInPress} />
     </View>
   );
 }
@@ -113,13 +116,14 @@ export default function Login() {
 const styles = StyleSheet.create({
   container: customStyles.loginSignUp.container,
 
-  imgStyle: {marginTop: 52},
+  imgStyle: {marginTop: 0},
 
   loginButtonStyle: customStyles.buttonStyle,
 
   loginButtonTextStyle: customStyles.buttonText,
 
   customStyleForButton: {
+    marginTop: 16,
     marginBottom: 0,
   },
 
@@ -136,5 +140,16 @@ const styles = StyleSheet.create({
     top: 0,
     bottom: 0,
     justifyContent: 'center',
+  },
+
+  goStyle: {
+    width: 48,
+    height: 48,
+    borderRadius: 24,
+  },
+
+  goBackButton: {
+    width: Dimensions.get('screen').width,
+    marginTop: 32,
   },
 });
