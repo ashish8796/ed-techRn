@@ -3,7 +3,7 @@ import {View, Text, StyleSheet} from 'react-native';
 import {customStyles} from '../utils/styles';
 import Button from '../components/Screens/Button';
 import CreateScreensImg from '../components/Screens/CreateScreensImg';
-import Pagination from './Pagination';
+import Pagination from '../components/Pagination';
 import CoolKidsStylingHome from './../assets/images/screens/intro-2/Cool Kids Staying Home.svg';
 
 export default function Intro2() {

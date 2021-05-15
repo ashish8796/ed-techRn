@@ -1,15 +1,20 @@
-import React from 'react';
-import {SafeAreaView, StyleSheet} from 'react-native';
-import Splash from './src/screens/Splash';
+import React, {useEffect} from 'react';
+import {SafeAreaView, StyleSheet, Platform, StatusBar} from 'react-native';
+import SplashScreen from 'react-native-splash-screen';
 import Intro1 from './src/screens/Intro1';
 import Intro2 from './src/screens/Intro2';
 
 const App = () => {
+  useEffect(() => {
+    SplashScreen.hide();
+  }, []);
+
   return (
     <SafeAreaView style={styles.appContainer}>
-      {/* <Splash /> */}
       {/* <Intro1 /> */}
       <Intro2 />
+
+      {Platform.OS === 'ios' && <StatusBar barStyle="light-content" />}
     </SafeAreaView>
   );
 };
