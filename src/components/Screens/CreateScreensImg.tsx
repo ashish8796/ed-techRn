@@ -10,14 +10,16 @@ interface ScreenText {
 interface ICreateScreensImgProps {
   text: ScreenText;
   SvgImg: Svg;
+  imgStyle?: {};
 }
 
 export default function CreateScreensImg({
   text,
   SvgImg,
+  imgStyle,
 }: ICreateScreensImgProps) {
   return (
-    <View style={styles.imgContainer}>
+    <View style={[styles.imgContainer, imgStyle]}>
       <SvgImg />
 
       <View style={styles.textContainer}>

@@ -6,6 +6,7 @@ import {
   StyleSheet,
   ScrollViewProps,
   ScrollViewComponent,
+  Dimensions,
 } from 'react-native';
 import {customStyles} from '../utils/styles';
 import Intro1 from './Intro1';
@@ -13,8 +14,11 @@ import Intro2 from './Intro2';
 import Button from '../components/Screens/Button';
 import Intro3 from './Intro3';
 import Pagination from '../components/Pagination';
+import {useNavigation} from '@react-navigation/native';
 
 export default function EdTechIntro() {
+  const navigation = useNavigation();
+
   const scrollRef = useRef(undefined);
   const [introNum, setIntroNum] = useState<number>(0);
 
@@ -25,9 +29,13 @@ export default function EdTechIntro() {
   };
 
   const handleOnPress = (): void => {
-    // if(introNum){} else
-
-    scrollRef.current.scrollTo({x: (introNum + 1) * 388});
+    if (introNum == 2) {
+      navigation.navigate('Login');
+    } else {
+      scrollRef.current.scrollTo({
+        x: (introNum + 1) * Dimensions.get('screen').width,
+      });
+    }
   };
 
   return (
@@ -75,6 +83,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'space-between',
     alignItems: 'center',
+    backgroundColor: '#fff',
   },
 
   scrollContainer: {

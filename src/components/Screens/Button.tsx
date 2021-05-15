@@ -6,6 +6,7 @@ interface IButtonProps {
   handlePress: () => void;
   buttonStyle: any;
   textStyle: any;
+  customStyleViaComponent?: {};
 }
 
 export default function Button({
@@ -13,9 +14,12 @@ export default function Button({
   handlePress,
   buttonStyle,
   textStyle,
+  customStyleViaComponent,
 }: IButtonProps) {
   return (
-    <TouchableOpacity onPress={handlePress} style={buttonStyle}>
+    <TouchableOpacity
+      onPress={handlePress}
+      style={[buttonStyle, customStyleViaComponent]}>
       <Text style={textStyle}>{label}</Text>
     </TouchableOpacity>
   );
