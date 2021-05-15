@@ -43,6 +43,17 @@ const customStyles = {
     height: 446,
     alignItems: 'center',
   },
+
+  loginSignUp: {
+    container: {
+      flex: 1,
+      paddingHorizontal: 16,
+      alignItems: 'center',
+      backgroundColor: '#fff',
+      // borderColor: 'red',
+      // borderWidth: 1,
+    },
+  },
 };
 
 export {customStyles};
