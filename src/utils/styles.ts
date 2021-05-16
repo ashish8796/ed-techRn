@@ -23,6 +23,10 @@ interface CustomStyles extends NestedStyles {
   center: ViewStyle;
 }
 
+const text = {
+
+}
+
 const customStyles: CustomStyles = {
   buttonStyle: {
     width: 311,

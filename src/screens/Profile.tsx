@@ -1,7 +1,9 @@
+import {useNavigation} from '@react-navigation/native';
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import GoBack from '../components/Screens/GoBack';
 import LoginSignButton from '../components/Screens/LoginSignButton';
+import TabBar from '../components/Screens/TabBar';
 import {customStyles} from '../utils/styles';
 import {handleGoBack} from '../utils/utilsFuctions';
 import CoolKidsBust from './../assets/images/screens/profile/Cool Kids Bust.svg';
@@ -9,10 +11,15 @@ import CoolKidsBust from './../assets/images/screens/profile/Cool Kids Bust.svg'
 interface IProfileProps {}
 
 export default function Profile({}: IProfileProps) {
+  const navigation = useNavigation();
+
   return (
-    <View style={[styles.profileWrapper, customStyles.center]}>
+    <View style={[styles.profileWrapper]}>
       <View style={[styles.topBar, customStyles.center]}>
-        <GoBack handlePress={handleGoBack} goStyle={styles.goStyle} />
+        <GoBack
+          handlePress={() => handleGoBack(navigation)}
+          goStyle={styles.goStyle}
+        />
 
         <Text style={styles.title}>Profile</Text>
       </View>
@@ -36,6 +43,8 @@ export default function Profile({}: IProfileProps) {
         handlePress={() => {}}
         customStyle={{text: {marginVertical: 8}, button: {marginTop: 0}}}
       />
+
+      {/* <TabBar /> */}
     </View>
   );
 }
@@ -43,6 +52,8 @@ export default function Profile({}: IProfileProps) {
 const styles = StyleSheet.create({
   profileWrapper: {
     backgroundColor: '#fff',
+    flex: 1,
+    alignItems: 'center',
   },
 
   avatarBox: {
