@@ -1,13 +1,6 @@
 import {useNavigation} from '@react-navigation/native';
 import React, {useState} from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  Dimensions,
-  NativeSyntheticEvent,
-  TextInputChangeEventData,
-} from 'react-native';
+import {View, Text, StyleSheet, Dimensions, Alert} from 'react-native';
 import CreateIcon from '../components/CreateIcon';
 import Button from '../components/Screens/Button';
 import CreateScreensImg from '../components/Screens/CreateScreensImg';
@@ -18,6 +11,23 @@ import {iconsObj} from '../utils/icons';
 import {customStyles} from '../utils/styles';
 import {handleGoBack} from '../utils/utilsFuctions';
 import CoolKidsStanding from './../assets/images/screens/signUp/Cool Kids Standing.svg';
+import AsyncStorage from '@react-native-community/async-storage';
+import {useFormik} from 'formik';
+import * as yup from 'yup';
+
+const signUpSchema = yup.object().shape({
+  name: yup.string().required().label('Name'),
+  email: yup
+    .string()
+    .email('Invalid email')
+    .required('Required')
+    .label('Email'),
+  password: yup
+    .string()
+    .min(6, 'Password is too short')
+    .required()
+    .label('Password'),
+});
 
 const initState = {
   name: '',
@@ -27,8 +37,35 @@ const initState = {
 
 export default function SignUp() {
   const navigation = useNavigation();
-  const [userData, setUserData] = useState(initState);
-  const {name, email, password} = userData;
+  const formik = useFormik({
+    initialValues: initState,
+    validationSchema: signUpSchema,
+    onSubmit: values => {
+      AsyncStorage.setItem('userData', JSON.stringify(values));
+      console.log(values);
+
+      navigation.navigate('Login');
+    },
+  });
+
+  console.log(formik.errors, formik.touched);
+
+  const {name, email, password} = formik.values;
+
+  if (formik.isSubmitting) {
+    if (Object.keys(formik.errors).length) {
+      let str = '';
+
+      for (let key in formik.errors) {
+        str += formik.errors[key] + '\n';
+      }
+
+      Alert.alert(str);
+    }
+  }
+
+  console.log(formik.isSubmitting);
+
   const [passwordShown, setPasswordShown] = useState<boolean>(false);
 
   const text = {
@@ -43,14 +80,6 @@ export default function SignUp() {
 
   const handleLogInPress = (): void => {
     navigation.navigate('Login');
-  };
-
-  const handleOnChange = (
-    e: NativeSyntheticEvent<TextInputChangeEventData>,
-    name: string,
-  ): void => {
-    const {text} = e.nativeEvent;
-    setUserData({...userData, [name]: text});
   };
 
   return (
@@ -71,26 +100,20 @@ export default function SignUp() {
       <Input
         placeholderText="Name"
         value={name}
-        handleChange={handleOnChange}
-        password={false}
-        name="name"
+        handleChange={formik.handleChange('name')}
       />
 
       <Input
         placeholderText="Email"
         value={email}
-        handleChange={handleOnChange}
-        password={false}
-        name="email"
+        handleChange={formik.handleChange('email')}
       />
 
       <View>
         <Input
           placeholderText="Password"
           value={password}
-          handleChange={handleOnChange}
-          password={false}
-          name="password"
+          handleChange={formik.handleChange('password')}
           secureTextEntry={!passwordShown}
         />
         <CreateIcon
@@ -102,7 +125,7 @@ export default function SignUp() {
 
       <Button
         label="Sign up"
-        handlePress={() => {}}
+        handlePress={formik.handleSubmit}
         buttonStyle={styles.loginButtonStyle}
         textStyle={styles.loginButtonTextStyle}
         customStyleViaComponent={styles.customStyleForButton}

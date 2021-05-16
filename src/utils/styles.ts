@@ -1,6 +1,33 @@
-import {Dimensions} from 'react-native';
+import { Dimensions, TextStyle, ViewStyle } from 'react-native';
 
-const customStyles = {
+interface NestedStyles {
+  skip: {
+    buttonStyle: ViewStyle;
+    textStyle: TextStyle;
+  };
+
+  loginSignUp: {
+    container: ViewStyle;
+  };
+
+  topBar: {
+    container: ViewStyle;
+    title: TextStyle;
+  };
+}
+
+interface CustomStyles extends NestedStyles {
+  buttonStyle: ViewStyle;
+  buttonText: TextStyle;
+  introContainer: ViewStyle;
+  center: ViewStyle;
+}
+
+const text = {
+
+}
+
+const customStyles: CustomStyles = {
   buttonStyle: {
     width: 311,
     height: 56,
@@ -55,6 +82,30 @@ const customStyles = {
       // borderWidth: 1,
     },
   },
+
+  topBar: {
+    container: {
+      flexDirection: "row",
+    },
+
+    title: {
+      fontSize: 24,
+      fontWeight: "500",
+      fontFamily: "Rubik-Medium",
+      color: "#3C3A36",
+      textAlign: "center",
+      flex: 1,
+      marginRight: 56,
+      height: 32,
+      // borderColor: "red",
+      // borderWidth: 1
+    }
+  },
+
+  center: {
+    justifyContent: "center",
+    alignItems: "center"
+  }
 };
 
-export {customStyles};
+export { customStyles };

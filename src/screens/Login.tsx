@@ -1,12 +1,5 @@
 import React, {useState} from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  NativeSyntheticEvent,
-  TextInputChangeEventData,
-} from 'react-native';
+import {View, Text, StyleSheet, Alert} from 'react-native';
 import Input from '../components/Screens/Input';
 import {customStyles} from '../utils/styles';
 import CreateScreensImg from '../components/Screens/CreateScreensImg';
@@ -17,19 +10,61 @@ import CreateIcon from '../components/CreateIcon';
 import {iconObj} from '../utils/socialMediaIcon';
 import {iconsObj} from '../utils/icons';
 import {useNavigation} from '@react-navigation/native';
+import {useFormik} from 'formik';
+import * as yup from 'yup';
+import AsyncStorage, {
+  useAsyncStorage,
+} from '@react-native-community/async-storage';
 
 const initState = {
   email: '',
   password: '',
 };
 
+const logInSchema = yup.object().shape({
+  email: yup.string().email('Invalid Email').required().label('Email'),
+  password: yup.string().required().label('Password'),
+});
+
 export default function Login() {
   const navigation = useNavigation();
-  const [loginData, setLoginData] = useState(initState);
+  const {getItem} = useAsyncStorage('userData');
+
+  const formik = useFormik({
+    initialValues: initState,
+    validationSchema: logInSchema,
+    onSubmit: values => {
+      getItem((error, result) => {
+        const {email, password} = JSON.parse(result || '');
+        if (values.email === email && values.password === password) {
+          AsyncStorage.setItem('isAuth', 'true');
+          navigation.navigate('Tabs');
+        } else {
+          Alert.alert('Email or password does not match.');
+        }
+      });
+    },
+  });
+
+  // console.log(
+  //   getItem((error, result) => {
+  //     console.log(error, result);
+  //   }),
+  // );
 
   const [isPasswordShown, setPasswordShown] = useState<boolean>(false);
 
-  const {email, password} = loginData;
+  const {email, password} = formik.values;
+
+  if (formik.isSubmitting) {
+    if (Object.keys(formik.errors).length) {
+      let str = '';
+      for (let key in formik.errors) {
+        str += formik.errors[key] + '\n';
+      }
+      Alert.alert(str);
+    }
+  }
 
   const text = {
     title: 'Log in',
@@ -40,17 +75,6 @@ export default function Login() {
     console.log(isPasswordShown);
     setPasswordShown(!isPasswordShown);
   };
-
-  const handleOnChange = (
-    e: NativeSyntheticEvent<TextInputChangeEventData>,
-    name: string,
-  ): void => {
-    const {text} = e.nativeEvent;
-    setLoginData({...loginData, [name]: text});
-    console.log(e.nativeEvent);
-  };
-
-  const handleLoginPress = () => {};
 
   const handleSignUpPress = (): void => {
     navigation.navigate('SignUp');
@@ -73,18 +97,14 @@ export default function Login() {
       <Input
         placeholderText="Email"
         value={email}
-        handleChange={handleOnChange}
-        password={false}
-        name="email"
+        handleChange={formik.handleChange('email')}
       />
 
       <View>
         <Input
           placeholderText="Password"
           value={password}
-          handleChange={handleOnChange}
-          password={false}
-          name="password"
+          handleChange={formik.handleChange('password')}
           secureTextEntry={!isPasswordShown}
         />
 
@@ -99,7 +119,7 @@ export default function Login() {
 
       <Button
         label="Log in"
-        handlePress={handleLoginPress}
+        handlePress={formik.handleSubmit}
         buttonStyle={styles.loginButtonStyle}
         textStyle={styles.loginButtonTextStyle}
         customStyleViaComponent={styles.customStyleForButton}

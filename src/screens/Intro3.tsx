@@ -1,6 +1,5 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
-import Pagination from './../components/Pagination';
 import CreateScreensImg from '../components/Screens/CreateScreensImg';
 import {customStyles} from '../utils/styles';
 import coolKidsHighTech from './../assets/images/screens/intro-3/Cool Kids High Tech.svg';
