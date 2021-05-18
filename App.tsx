@@ -10,6 +10,7 @@ import SignUp from './src/screens/SignUp';
 import Profile from './src/screens/Profile';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import AsyncStorage from '@react-native-community/async-storage';
+import Settings from './src/screens/Settings/Settings';
 
 const parseData = async (key: string) => {
   let error;
@@ -30,6 +31,7 @@ function TabScreenNavigator() {
   return (
     <Tab.Navigator>
       <Tab.Screen name="Profile" component={Profile} />
+      <Tab.Screen name="Settings" component={Settings} />
     </Tab.Navigator>
   );
 }

@@ -14,6 +14,13 @@ interface NestedStyles {
     container: ViewStyle;
     title: TextStyle;
   };
+
+  normalText: {
+    title: TextStyle,
+    body: TextStyle
+  }
+
+
 }
 
 interface CustomStyles extends NestedStyles {
@@ -21,11 +28,10 @@ interface CustomStyles extends NestedStyles {
   buttonText: TextStyle;
   introContainer: ViewStyle;
   center: ViewStyle;
-}
-
-const text = {
 
 }
+
+
 
 const customStyles: CustomStyles = {
   buttonStyle: {
@@ -81,6 +87,24 @@ const customStyles: CustomStyles = {
       // borderColor: 'red',
       // borderWidth: 1,
     },
+  },
+
+  normalText: {
+    title: {
+      fontWeight: "500",
+      fontFamily: "Rubik-Medium",
+      color: "#3C3A36",
+      textAlign: "center",
+      fontSize: 20
+    },
+
+    body: {
+      fontSize: 14,
+      lineHeight: 21,
+      fontFamily: "Rubik-Regular",
+      fontWeight: "400",
+      color: "#78746D"
+    }
   },
 
   topBar: {

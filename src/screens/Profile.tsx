@@ -50,8 +50,6 @@ export default function Profile({}: IProfileProps) {
         handlePress={handleLogOut}
         customStyle={{text: {marginVertical: 8}, button: {marginTop: 0}}}
       />
-
-      {/* <TabBar /> */}
     </View>
   );
 }
