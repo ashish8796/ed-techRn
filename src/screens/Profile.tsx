@@ -1,3 +1,4 @@
+import AsyncStorage from '@react-native-community/async-storage';
 import {useNavigation} from '@react-navigation/native';
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
@@ -12,6 +13,12 @@ interface IProfileProps {}
 
 export default function Profile({}: IProfileProps) {
   const navigation = useNavigation();
+
+  const handleLogOut = () => {
+    AsyncStorage.setItem('isAuth', 'false');
+
+    // navigation.navigate('Login');
+  };
 
   return (
     <View style={[styles.profileWrapper]}>
@@ -40,7 +47,7 @@ export default function Profile({}: IProfileProps) {
 
       <LoginSignButton
         label="Log Out"
-        handlePress={() => {}}
+        handlePress={handleLogOut}
         customStyle={{text: {marginVertical: 8}, button: {marginTop: 0}}}
       />
 
