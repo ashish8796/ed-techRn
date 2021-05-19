@@ -11,6 +11,7 @@ import Profile from './src/screens/Profile';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import AsyncStorage from '@react-native-community/async-storage';
 import Settings from './src/screens/Settings/Settings';
+import Home from './src/screens/Home/Home';
 
 const parseData = async (key: string) => {
   let error;
@@ -30,7 +31,10 @@ const Tab = createBottomTabNavigator();
 function TabScreenNavigator() {
   return (
     <Tab.Navigator>
+      <Tab.Screen name="Courses" component={Home} />
+
       <Tab.Screen name="Profile" component={Profile} />
+
       <Tab.Screen name="Settings" component={Settings} />
     </Tab.Navigator>
   );
