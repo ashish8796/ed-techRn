@@ -28,12 +28,18 @@ interface CustomStyles extends NestedStyles {
   buttonText: TextStyle;
   introContainer: ViewStyle;
   center: ViewStyle;
+  screenWrapper: ViewStyle;
 
 }
 
 
-
 const customStyles: CustomStyles = {
+  screenWrapper: {
+    backgroundColor: "#fff",
+    paddingHorizontal: 16,
+    alignItems: 'center',
+  },
+
   buttonStyle: {
     width: 311,
     height: 56,
