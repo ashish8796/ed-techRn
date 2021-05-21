@@ -2,29 +2,30 @@ import React from 'react';
 import {StyleSheet} from 'react-native';
 import {View, Text} from 'react-native';
 import Svg from 'react-native-svg';
+import {featureImgObj} from '../../../utils/featureImg';
 import {customStyles} from '../../../utils/styles';
 import CreateIcon from '../../CreateIcon';
 import CreateTags from '../CreateTags';
 
-interface ICourseCardProps {
-  Icon: Svg;
+export interface Course {
+  name: string;
   cost: number;
-  time: string;
-  title: string;
+  id: number;
   body: string;
+  duration: string;
+  img: string;
 }
 
-export default function CourseCard({
-  Icon,
-  cost,
-  time,
-  title,
-  body,
-}: ICourseCardProps) {
+interface ICourseCardProps {
+  course: Course;
+}
+
+export default function CourseCard({course}: ICourseCardProps) {
+  const {name, cost, duration, img, body} = course;
   return (
     <View style={styles.cardWrapper}>
       <View style={styles.courseImg}>
-        <CreateIcon Icon={Icon} handlePress={() => {}} />
+        <CreateIcon Icon={featureImgObj[img]} handlePress={() => {}} />
 
         <View style={styles.tagBox}>
           <CreateTags
@@ -37,8 +38,8 @@ export default function CourseCard({
 
       <View style={styles.courseTextBox}>
         <View>
-          <Text style={styles.timeText}>{time}</Text>
-          <Text style={styles.title}>{title}</Text>
+          <Text style={styles.timeText}>{duration}</Text>
+          <Text style={styles.title}>{name}</Text>
           <Text style={styles.body}>{body}</Text>
         </View>
       </View>
