@@ -1,6 +1,7 @@
 import {useNavigation} from '@react-navigation/native';
 import React, {useState} from 'react';
 import {View, Text, StyleSheet, Dimensions, Alert} from 'react-native';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import CreateIcon from '../components/CreateIcon';
 import Button from '../components/Screens/Button';
 import CreateScreensImg from '../components/Screens/CreateScreensImg';
@@ -83,56 +84,58 @@ export default function SignUp() {
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.goBackButton}>
-        <GoBack
-          handlePress={() => handleGoBack(navigation)}
-          goStyle={styles.goStyle}
+    <KeyboardAwareScrollView style={customStyles.keyboardAwareStyle}>
+      <View style={styles.container}>
+        <View style={styles.goBackButton}>
+          <GoBack
+            handlePress={() => handleGoBack(navigation)}
+            goStyle={styles.goStyle}
+          />
+        </View>
+
+        <CreateScreensImg
+          text={text}
+          SvgImg={CoolKidsStanding}
+          imgStyle={styles.imgStyle}
         />
-      </View>
 
-      <CreateScreensImg
-        text={text}
-        SvgImg={CoolKidsStanding}
-        imgStyle={styles.imgStyle}
-      />
-
-      <Input
-        placeholderText="Name"
-        value={name}
-        handleChange={formik.handleChange('name')}
-      />
-
-      <Input
-        placeholderText="Email"
-        value={email}
-        handleChange={formik.handleChange('email')}
-      />
-
-      <View>
         <Input
-          placeholderText="Password"
-          value={password}
-          handleChange={formik.handleChange('password')}
-          secureTextEntry={!passwordShown}
+          placeholderText="Name"
+          value={name}
+          handleChange={formik.handleChange('name')}
         />
-        <CreateIcon
-          handlePress={handleEyePress}
-          Icon={iconsObj[passwordShown ? 'open eye' : 'close eye']}
-          iconStyle={styles.iconStyle}
+
+        <Input
+          placeholderText="Email"
+          value={email}
+          handleChange={formik.handleChange('email')}
         />
+
+        <View>
+          <Input
+            placeholderText="Password"
+            value={password}
+            handleChange={formik.handleChange('password')}
+            secureTextEntry={!passwordShown}
+          />
+          <CreateIcon
+            handlePress={handleEyePress}
+            Icon={iconsObj[passwordShown ? 'open eye' : 'close eye']}
+            iconStyle={styles.iconStyle}
+          />
+        </View>
+
+        <Button
+          label="Sign up"
+          handlePress={formik.handleSubmit}
+          buttonStyle={styles.loginButtonStyle}
+          textStyle={styles.loginButtonTextStyle}
+          customStyleViaComponent={styles.customStyleForButton}
+        />
+
+        <LoginSignButton label="Log in" handlePress={handleLogInPress} />
       </View>
-
-      <Button
-        label="Sign up"
-        handlePress={formik.handleSubmit}
-        buttonStyle={styles.loginButtonStyle}
-        textStyle={styles.loginButtonTextStyle}
-        customStyleViaComponent={styles.customStyleForButton}
-      />
-
-      <LoginSignButton label="Log in" handlePress={handleLogInPress} />
-    </View>
+    </KeyboardAwareScrollView>
   );
 }
 

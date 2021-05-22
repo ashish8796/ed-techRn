@@ -12,6 +12,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import AsyncStorage from '@react-native-community/async-storage';
 import Settings from './src/screens/Settings/Settings';
 import Home from './src/screens/Home/Home';
+import Results from './src/screens/Results/Results';
 
 const parseData = async (key: string) => {
   let error;
@@ -21,6 +22,8 @@ const parseData = async (key: string) => {
     }
   });
 
+  console.log(error, 'error line 25');
+  console.log(data, 'line 26');
   return data ? JSON.parse(data) : error;
 };
 
@@ -42,11 +45,17 @@ function TabScreenNavigator() {
 
 const App = () => {
   const [isAuth, setIsAuth] = useState<boolean>(false);
+  const [isOnboarded, setIsOnboarded] = useState<boolean>(false);
 
   useEffect(() => {
     (async () => {
       const isAuth = await parseData('isAuth');
-      setIsAuth(isAuth);
+      console.log(isAuth, 'line 59');
+      setIsAuth(isAuth ? isAuth : false);
+
+      const isOnboarded = await parseData('isOnboarded');
+      // console.log(isOnboarded, 'line 62');
+      setIsOnboarded(isOnboarded ? isOnboarded : false);
     })();
 
     SplashScreen.hide();
@@ -58,7 +67,9 @@ const App = () => {
 
       <SafeAreaView style={styles.appContainer}>
         <Stack.Navigator screenOptions={{headerShown: false}}>
-          {!isAuth && <Stack.Screen name="App Intro" component={EdTechIntro} />}
+          {!isOnboarded && (
+            <Stack.Screen name="App Intro" component={EdTechIntro} />
+          )}
 
           {!isAuth && (
             <>
@@ -69,6 +80,8 @@ const App = () => {
           )}
 
           <Stack.Screen name="Tabs" component={TabScreenNavigator} />
+
+          <Stack.Screen name="Results" component={Results} />
         </Stack.Navigator>
       </SafeAreaView>
     </NavigationContainer>

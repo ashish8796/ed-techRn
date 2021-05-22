@@ -1,31 +1,37 @@
 import React from 'react';
-import {View, Text, StyleSheet, TextInput} from 'react-native';
+import {View, Text, StyleSheet, TextInput, ViewStyle} from 'react-native';
 import CreateIcon from '../../components/CreateIcon';
 import SearchIcon from './../../assets/images/screens/courses/searchIcon.svg';
 
 interface ICreateSearchBoxProps {
   placeholderText: string;
-  handleChange: () => void;
+  handleChange: (text: string) => void;
   value: string;
+  handleSearchPress: () => void;
+  customStyles?: ViewStyle;
 }
 
 export default function CreateSearchBox({
   placeholderText,
   handleChange,
   value,
+  handleSearchPress,
+  customStyles,
 }: ICreateSearchBoxProps) {
   return (
-    <View style={styles.searchBox}>
+    <View style={[styles.searchBox, customStyles]}>
       <TextInput
         placeholder={placeholderText}
         style={styles.searchText}
         placeholderTextColor="#78746D"
+        onChangeText={handleChange}
+        value={value}
       />
 
       <CreateIcon
         Icon={SearchIcon}
         iconStyle={styles.icon}
-        handlePress={() => {}}
+        handlePress={handleSearchPress}
       />
     </View>
   );
@@ -33,15 +39,14 @@ export default function CreateSearchBox({
 
 const styles = StyleSheet.create({
   searchBox: {
-    width: 343,
     height: 56,
     borderRadius: 12,
-    padding: 16,
+    paddingHorizontal: 16,
     borderColor: '#BEBAB3',
     borderWidth: 1,
     marginVertical: 12,
     flexDirection: 'row',
-    // justifyContent: 'center',
+    alignItems: 'center',
   },
 
   searchText: {

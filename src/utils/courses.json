@@ -1,0 +1,46 @@
+[
+  {
+    "id": 1,
+    "name": "UI",
+    "cost": 50,
+    "body": "Advanced mobile interface design",
+    "duration": "3 h 30 min",
+    "img": "cool kids discussion"
+  },
+
+  {
+    "id": 2,
+    "name": "UI Advanced",
+    "cost": 50,
+    "body": "Advanced mobile interface design",
+    "duration": "3 h 30 min",
+    "img": "cool kids high tech"
+  },
+
+  {
+    "id": 3,
+    "name": "UI",
+    "cost": 50,
+    "body": "Advanced web applications",
+    "duration": "3 h 30 min",
+    "img": "cool kids alone time"
+  },
+
+  {
+    "id": 4,
+    "name": "Swift",
+    "cost": 50,
+    "body": "Advanced iOS apps",
+    "duration": "3 h 30 min",
+    "img": "cool kids alone time 2"
+  },
+
+  {
+    "id": 5,
+    "name": "Scrum",
+    "cost": 50,
+    "body": "Advanced project organization course",
+    "duration": "3 h 30 min",
+    "img": "cool kids performing"
+  }
+]

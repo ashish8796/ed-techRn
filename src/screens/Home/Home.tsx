@@ -1,16 +1,16 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
-import CreateIcon from '../../components/CreateIcon';
 import {customStyles} from '../../utils/styles';
 import HomeNameSection from './HomeNameSection';
 import HomeCourseSection from './HomeCourseSection';
+import courses from './../../utils/courses.json';
 
 export default function Home() {
   return (
     <View style={styles.homeContainer}>
       <HomeNameSection />
 
-      <HomeCourseSection />
+      <HomeCourseSection courses={courses} />
     </View>
   );
 }
