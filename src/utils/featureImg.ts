@@ -10,11 +10,11 @@ import CoolKidsAloneTime2 from './../assets/images/screens/courses/coolKidsAlone
 import Svg from 'react-native-svg';
 
 interface FeatureImgObj {
-  "cool kids discussion": string;
-  "cool kids high tech": string;
-  "cool kids performing": string;
-  "cool kids alone time 2": string;
-  "cool kids alone time": string;
+  "cool kids discussion": Svg;
+  "cool kids high tech": Svg;
+  "cool kids performing": Svg;
+  "cool kids alone time 2": Svg;
+  "cool kids alone time": Svg;
 
 }
 

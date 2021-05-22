@@ -29,11 +29,17 @@ interface CustomStyles extends NestedStyles {
   introContainer: ViewStyle;
   center: ViewStyle;
   screenWrapper: ViewStyle;
-
+  keyboardAwareStyle: ViewStyle
 }
 
 
 const customStyles: CustomStyles = {
+  keyboardAwareStyle: {
+    flex: 1,
+    backgroundColor: '#fff'
+  },
+
+
   screenWrapper: {
     backgroundColor: "#fff",
     paddingHorizontal: 16,
@@ -89,7 +95,7 @@ const customStyles: CustomStyles = {
       paddingHorizontal: 16,
       alignItems: 'center',
       backgroundColor: '#fff',
-      position: 'relative',
+      // position: 'relative',
       // borderColor: 'red',
       // borderWidth: 1,
     },

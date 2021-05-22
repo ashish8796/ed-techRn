@@ -1,9 +1,10 @@
-declare module "*.svg" {
-  const content: any;
-  export default content;
+declare module "*.json" {
+  const value: [];
+  export default value;
 }
 
-declare module "*.json" {
-  const value: any;
-  export default value;
+declare module "*.svg" {
+  import Svg from "react-native-svg";
+  const content: Svg;
+  export default content;
 }

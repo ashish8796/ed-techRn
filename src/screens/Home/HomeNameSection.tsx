@@ -1,4 +1,6 @@
+import {useNavigation} from '@react-navigation/native';
 import React from 'react';
+import {useState} from 'react';
 import {FlatList, StyleSheet, View, Text} from 'react-native';
 import CreateIcon from '../../components/CreateIcon';
 import CreateTags from '../../components/Screens/CreateTags';
@@ -9,7 +11,18 @@ import CreateSearchBox from './CreateSearchBox';
 interface IHomeNameSectionProps {}
 
 export default function HomeNameSection({}: IHomeNameSectionProps) {
+  const navigation = useNavigation();
   const tagList = ['#css', '#UX', '#Swift', '#UI'];
+
+  const [searchText, setSearchText] = useState<string>('');
+
+  const handleSearchBox = (text: string): void => {
+    setSearchText(text);
+  };
+
+  const handleSearchPress = () => {
+    navigation.navigate('Results');
+  };
 
   return (
     <View style={styles.nameSection}>
@@ -27,8 +40,10 @@ export default function HomeNameSection({}: IHomeNameSectionProps) {
 
       <CreateSearchBox
         placeholderText="Search Course"
-        value=""
-        handleChange={() => {}}
+        value={searchText}
+        handleChange={handleSearchBox}
+        handleSearchPress={handleSearchPress}
+        customStyles={{width: '100%'}}
       />
 
       <View style={styles.categoryBox}>

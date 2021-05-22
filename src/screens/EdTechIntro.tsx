@@ -15,6 +15,7 @@ import Button from '../components/Screens/Button';
 import Intro3 from './Intro3';
 import Pagination from '../components/Pagination';
 import {useNavigation} from '@react-navigation/native';
+import AsyncStorage from '@react-native-community/async-storage';
 
 export default function EdTechIntro() {
   const navigation = useNavigation();
@@ -31,6 +32,7 @@ export default function EdTechIntro() {
   const handleOnPress = (): void => {
     if (introNum == 2) {
       navigation.navigate('Login');
+      AsyncStorage.setItem('isOnboarded', 'true');
     } else {
       scrollRef.current.scrollTo({
         x: (introNum + 1) * Dimensions.get('screen').width,

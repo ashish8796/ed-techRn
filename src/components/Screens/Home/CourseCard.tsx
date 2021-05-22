@@ -21,10 +21,14 @@ interface ICourseCardProps {
 }
 
 export default function CourseCard({course}: ICourseCardProps) {
-  const {name, cost, duration, img, body} = course;
+  const {name, cost, duration, img, body, id} = course;
   return (
     <View style={styles.cardWrapper}>
-      <View style={styles.courseImg}>
+      <View
+        style={[
+          styles.courseImg,
+          {backgroundColor: id % 2 ? '#F8F2EE' : '#E6EDF4'},
+        ]}>
         <CreateIcon Icon={featureImgObj[img]} handlePress={() => {}} />
 
         <View style={styles.tagBox}>
@@ -60,7 +64,6 @@ const styles = StyleSheet.create({
     paddingTop: 16,
     borderTopLeftRadius: 8,
     borderTopRightRadius: 8,
-    backgroundColor: '#F8F2EE',
   },
 
   tagBox: {

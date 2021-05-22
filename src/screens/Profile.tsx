@@ -17,7 +17,7 @@ export default function Profile({}: IProfileProps) {
   const handleLogOut = () => {
     AsyncStorage.setItem('isAuth', 'false');
 
-    // navigation.navigate('Login');
+    navigation.navigate('Login');
   };
 
   return (
