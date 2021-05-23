@@ -1,12 +1,13 @@
 import {useNavigation} from '@react-navigation/native';
 import React from 'react';
 import {useState} from 'react';
-import {FlatList, StyleSheet, View, Text} from 'react-native';
+import {FlatList, StyleSheet, View, Text, Pressable} from 'react-native';
 import CreateIcon from '../../components/CreateIcon';
 import CreateTags from '../../components/Screens/CreateTags';
 import {customStyles} from '../../utils/styles';
 import BellIcon from './../../assets/images/screens/courses/bellIcon.svg';
-import CreateSearchBox from './CreateSearchBox';
+import SearchIcon from './../../assets/images/screens/courses/searchIcon.svg';
+import {styles as searchBoxStyle} from './CreateSearchBox';
 
 interface IHomeNameSectionProps {}
 
@@ -14,11 +15,11 @@ export default function HomeNameSection({}: IHomeNameSectionProps) {
   const navigation = useNavigation();
   const tagList = ['#css', '#UX', '#Swift', '#UI'];
 
-  const [searchText, setSearchText] = useState<string>('');
+  // const [searchText, setSearchText] = useState<string>('');
 
-  const handleSearchBox = (text: string): void => {
-    setSearchText(text);
-  };
+  // const handleSearchBox = (text: string): void => {
+  //   setSearchText(text);
+  // };
 
   const handleSearchPress = () => {
     navigation.navigate('Results');
@@ -38,13 +39,13 @@ export default function HomeNameSection({}: IHomeNameSectionProps) {
         </View>
       </View>
 
-      <CreateSearchBox
-        placeholderText="Search Course"
-        value={searchText}
-        handleChange={handleSearchBox}
-        handleSearchPress={handleSearchPress}
-        customStyles={{width: '100%'}}
-      />
+      <Pressable onPress={handleSearchPress} style={searchBoxStyle.searchBox}>
+        <Text style={[searchBoxStyle.searchText, {color: '#78746D'}]}>
+          Search course
+        </Text>
+
+        <SearchIcon />
+      </Pressable>
 
       <View style={styles.categoryBox}>
         <Text style={styles.categoryText}>Category:</Text>
@@ -61,6 +62,8 @@ export default function HomeNameSection({}: IHomeNameSectionProps) {
             )}
             keyExtractor={tag => tag}
             horizontal
+            showsHorizontalScrollIndicator={false}
+            scrollEnabled={false}
           />
         </View>
       </View>

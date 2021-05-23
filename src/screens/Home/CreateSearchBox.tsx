@@ -37,7 +37,7 @@ export default function CreateSearchBox({
   );
 }
 
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
   searchBox: {
     height: 56,
     borderRadius: 12,
@@ -54,6 +54,7 @@ const styles = StyleSheet.create({
     lineHeight: 21,
     flex: 1,
     marginRight: 16,
+    color: '#78746D',
   },
 
   icon: {},

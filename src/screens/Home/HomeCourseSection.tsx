@@ -3,7 +3,6 @@ import {useState} from 'react';
 import {View, Text, StyleSheet, ScrollView} from 'react-native';
 import CourseCard, {Course} from '../../components/Screens/Home/CourseCard';
 import {customStyles} from '../../utils/styles';
-import CoolKidsDiscussing from './../../assets/images/screens/courses/coolKidsDiscussion.svg';
 
 interface IHomeCourseSectionProps {
   courses: Array<Course>;
@@ -11,7 +10,9 @@ interface IHomeCourseSectionProps {
 
 export default function HomeCourseSection({courses}: IHomeCourseSectionProps) {
   return (
-    <ScrollView style={styles.courseSection}>
+    <ScrollView
+      style={styles.courseSection}
+      showsVerticalScrollIndicator={false}>
       {courses.map(course => (
         <CourseCard key={course.id} course={course} />
       ))}
