@@ -1,7 +1,11 @@
-import React from 'react';
+import {useNavigation} from '@react-navigation/native';
+import React, {Dispatch} from 'react';
 import {StyleSheet} from 'react-native';
 import {View, Text} from 'react-native';
 import Svg from 'react-native-svg';
+import {useDispatch} from 'react-redux';
+import {setCourse} from '../../../store/productDetails/actions';
+import {SetCourse} from '../../../store/tsType';
 import {featureImgObj} from '../../../utils/featureImg';
 import {customStyles} from '../../../utils/styles';
 import CreateIcon from '../../CreateIcon';
@@ -21,7 +25,17 @@ interface ICourseCardProps {
 }
 
 export default function CourseCard({course}: ICourseCardProps) {
+  const dispatch = useDispatch<Dispatch<SetCourse>>();
+  const navigation = useNavigation();
+
   const {name, cost, duration, img, body, id} = course;
+
+  const handlePress = () => {
+    dispatch(setCourse(id));
+
+    navigation.navigate('Product');
+  };
+
   return (
     <View style={styles.cardWrapper}>
       <View
@@ -29,7 +43,7 @@ export default function CourseCard({course}: ICourseCardProps) {
           styles.courseImg,
           {backgroundColor: id % 2 ? '#F8F2EE' : '#E6EDF4'},
         ]}>
-        <CreateIcon Icon={featureImgObj[img]} handlePress={() => {}} />
+        <CreateIcon Icon={featureImgObj[img]} handlePress={handlePress} />
 
         <View style={styles.tagBox}>
           <CreateTags

@@ -13,6 +13,9 @@ import AsyncStorage from '@react-native-community/async-storage';
 import Settings from './src/screens/Settings/Settings';
 import Home from './src/screens/Home/Home';
 import Results from './src/screens/Results/Results';
+import {Provider} from 'react-redux';
+import store from './src/store/store';
+import ProductDetails from './src/screens/ProductDetails/ProductDetails';
 
 const parseData = async (key: string) => {
   let error;
@@ -62,29 +65,33 @@ const App = () => {
   }, []);
 
   return (
-    <NavigationContainer>
-      {Platform.OS === 'ios' && <StatusBar barStyle="dark-content" />}
+    <Provider store={store}>
+      <NavigationContainer>
+        {Platform.OS === 'ios' && <StatusBar barStyle="dark-content" />}
 
-      <SafeAreaView style={styles.appContainer}>
-        <Stack.Navigator screenOptions={{headerShown: false}}>
-          {!isOnboarded && (
-            <Stack.Screen name="App Intro" component={EdTechIntro} />
-          )}
+        <SafeAreaView style={styles.appContainer}>
+          <Stack.Navigator screenOptions={{headerShown: false}}>
+            {!isOnboarded && (
+              <Stack.Screen name="App Intro" component={EdTechIntro} />
+            )}
 
-          {!isAuth && (
-            <>
-              <Stack.Screen name="Login" component={Login} />
+            {!isAuth && (
+              <>
+                <Stack.Screen name="Login" component={Login} />
 
-              <Stack.Screen name="SignUp" component={SignUp} />
-            </>
-          )}
+                <Stack.Screen name="SignUp" component={SignUp} />
+              </>
+            )}
 
-          <Stack.Screen name="Tabs" component={TabScreenNavigator} />
+            <Stack.Screen name="Tabs" component={TabScreenNavigator} />
 
-          <Stack.Screen name="Results" component={Results} />
-        </Stack.Navigator>
-      </SafeAreaView>
-    </NavigationContainer>
+            <Stack.Screen name="Results" component={Results} />
+
+            <Stack.Screen name="Product" component={ProductDetails} />
+          </Stack.Navigator>
+        </SafeAreaView>
+      </NavigationContainer>
+    </Provider>
   );
 };
 

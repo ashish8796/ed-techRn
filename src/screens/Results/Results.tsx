@@ -2,7 +2,7 @@ import {useNavigation} from '@react-navigation/native';
 import React from 'react';
 import {useEffect} from 'react';
 import {useState} from 'react';
-import {View, Text, StyleSheet, ScrollView} from 'react-native';
+import {View, Text, StyleSheet, ScrollView, Keyboard} from 'react-native';
 import CourseNotFound from '../../components/Screens/CourseNotFound';
 import GoBack from '../../components/Screens/GoBack';
 import CourseCard, {Course} from '../../components/Screens/Home/CourseCard';
@@ -33,6 +33,7 @@ export default function Results() {
     setIsNoCourse(!newArr.length);
 
     setCourses(newArr);
+    Keyboard.dismiss();
   };
 
   useEffect(() => {
